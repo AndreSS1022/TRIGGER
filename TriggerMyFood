@@ -1,0 +1,10 @@
+DELIMITER $$
+CREATE TRIGGER actualizar_inventario
+AFTER INSERT ON factura
+FOR EACH ROW
+BEGIN
+    UPDATE inventario
+    SET cantidad = cantidad - NEW.cantidad
+    WHERE idProducto = NEW.idProducto;
+END$$
+DELIMITER ;
